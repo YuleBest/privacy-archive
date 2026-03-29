@@ -14,6 +14,12 @@ const formatDate = (val: any) => {
 const downloadUrl = computed(() => {
   return `https://github.com/YuleBest/privacy-archive/raw/main/p/${page.value.relativePath}`
 })
+
+const snapshotUrl = computed(() => {
+  if (!frontmatter.value.link || !frontmatter.value.date) return null
+  const dateStr = formatDate(frontmatter.value.date).replace(/-/g, '')
+  return `https://web.archive.org/web/${dateStr}000000*/${frontmatter.value.link}`
+})
 </script>
 
 <template>
@@ -103,7 +109,7 @@ const downloadUrl = computed(() => {
         </svg>
         <a :href="frontmatter.link" target="_blank" rel="noopener" class="link">原文</a>
       </div>
-      <div v-if="frontmatter.snapshot" class="meta-item highlight">
+      <div v-if="snapshotUrl" class="meta-item highlight">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -122,7 +128,7 @@ const downloadUrl = computed(() => {
           <path d="M16 13H8" />
           <path d="M16 17H8" />
         </svg>
-        <a :href="frontmatter.snapshot" target="_blank" rel="noopener" class="link">快照</a>
+        <a :href="snapshotUrl" target="_blank" rel="noopener" class="link">快照</a>
       </div>
       <div v-if="downloadUrl" class="meta-item highlight">
         <svg
@@ -170,6 +176,26 @@ const downloadUrl = computed(() => {
   transition: border-color 0.25s;
 }
 
+/* Responsive display logic */
+.article-meta.is-inline {
+  display: flex;
+}
+
+@media (min-width: 1280px) {
+  .article-meta.is-inline {
+    display: none;
+  }
+}
+
+/* Adjustments when inside the aside sidebar */
+:deep(.VPDocAside) .article-meta,
+footer .article-meta {
+  border: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+  gap: 0.15rem; /* Drastic reduction in section gap */
+}
+
 .article-meta:hover {
   border-color: var(--vp-c-brand-1);
 }
@@ -178,14 +204,28 @@ const downloadUrl = computed(() => {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 1.25rem;
+  gap: 0.5rem;
+}
+
+/* Force single column only in the sidebar */
+:deep(.VPDocAside) .meta-section {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0; /* Removing the items gap entirely */
+}
+
+:deep(.VPDocAside) .meta-item {
+  line-height: 1.4; /* Ultra tight line height */
+  font-size: 0.725rem;
+  margin: 0.05rem 0; /* Using tiny margins for controlled spacing */
+  padding-left: 0.5rem;
 }
 
 .meta-item {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   color: var(--vp-c-text-2);
 }
 
@@ -227,7 +267,14 @@ const downloadUrl = computed(() => {
   gap: 0.5rem;
   padding-top: 0.5rem;
   border-top: 1px solid var(--vp-c-divider);
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
+}
+
+:deep(.VPDocAside) .more-versions-section {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  font-size: 0.75rem;
 }
 
 .versions-links {
@@ -236,13 +283,18 @@ const downloadUrl = computed(() => {
   gap: 0.35rem;
 }
 
+:deep(.VPDocAside) .versions-links {
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
 .version-link {
   padding: 0.2rem 0.6rem;
   background: var(--vp-c-bg-mute);
   border-radius: 6px;
   color: var(--vp-c-text-2);
   text-decoration: none;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 500;
   transition: all 0.2s;
   border: 1px solid transparent;
@@ -252,11 +304,5 @@ const downloadUrl = computed(() => {
   background: var(--vp-c-bg-soft);
   color: var(--vp-c-brand-1);
   border-color: var(--vp-c-brand-3);
-}
-
-@media (min-width: 640px) {
-  .meta-section {
-    flex-wrap: nowrap;
-  }
 }
 </style>

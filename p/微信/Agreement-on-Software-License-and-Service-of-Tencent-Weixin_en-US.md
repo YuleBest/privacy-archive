@@ -3,7 +3,6 @@ lang: en-US
 date: 2026-03-30
 version: 2026-03-30
 link: https://weixin.qq.com/agreement/service_agreement?lang=en_US
-snapshot: https://web.archive.org/web/20260330000000*/https://weixin.qq.com/agreement/service_agreement?lang=en_US
 more:
   - text: 简体中文
     link: ./腾讯微信软件许可及服务协议_zh-CN

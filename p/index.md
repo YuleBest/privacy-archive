@@ -7,7 +7,7 @@ hero:
   actions:
     - theme: brand
       text: 开始浏览
-      link: ./p/
+      link: ./start
     - theme: alt
       text: 贡献条目
       link: ./contribute

@@ -50,7 +50,7 @@ export default defineConfig({
       md.renderer.rules.heading_close = (tokens, idx, options, env, self) => {
         const result = defaultRender(tokens, idx, options, env, self)
         if (tokens[idx].tag === 'h1') {
-          return result + '\n<ArticleMeta />\n'
+          return result + '\n<ArticleMeta class="is-inline" />\n'
         }
         return result
       }

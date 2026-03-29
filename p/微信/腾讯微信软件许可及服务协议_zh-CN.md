@@ -3,7 +3,6 @@ lang: zh-CN
 date: 2026-03-30
 version: 2026-03-30
 link: https://weixin.qq.com/agreement/service_agreement?lang=zh_CN
-snapshot: https://web.archive.org/web/20260330000000*/https://weixin.qq.com/agreement/service_agreement?lang=zh_CN
 more:
   - text: 繁體中文（臺灣）
     link: ./騰訊微信軟體許可及服務協議_zh-TW
