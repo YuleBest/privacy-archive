@@ -8,5 +8,5 @@ export default {
   extends: DefaultTheme,
   enhanceApp({ app }) {
     app.component('ArticleMeta', ArticleMeta as any)
-  }
+  },
 } satisfies Theme
