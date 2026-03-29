@@ -73,6 +73,7 @@ export default defineConfig({
   },
 
   vite: {
+    publicDir: '../public',
     server: {
       host: '0.0.0.0',
       port: 4568,

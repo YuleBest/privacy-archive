@@ -8,7 +8,11 @@ import pversionsData from '../configs/pversions.json'
 const pversions = pversionsData as Record<string, any>
 
 // Load all markdown files as raw text
-const rawModules = (import.meta as any).glob('../../p/**/*.md', { as: 'raw', eager: true })
+const rawModules = (import.meta as any).glob('../../p/**/*.md', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+})
 
 const productIds = Object.keys(pversions)
 const selectedProduct = ref(productIds[0] || '')

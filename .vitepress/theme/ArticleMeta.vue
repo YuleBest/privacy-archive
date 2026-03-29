@@ -6,7 +6,11 @@ import pversionsData from '../configs/pversions.json'
 const { frontmatter, page } = useData() as any
 const router = useRouter()
 
-const rawModules = (import.meta as any).glob('../../p/**/*.md', { as: 'raw', eager: true })
+const rawModules = (import.meta as any).glob('../../p/**/*.md', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+})
 
 const copyText = ref('复制')
 const onCopy = async () => {
