@@ -24,7 +24,7 @@ export default defineConfig({
 
     nav: [{ text: '首页', link: '/' }],
 
-    socialLinks: [{ icon: 'github', link: 'https://github.com/YuleBest' }],
+    socialLinks: [{ icon: 'github', link: 'https://github.com/YuleBest/privacy-archive' }],
   },
 
   vite: {
@@ -38,6 +38,24 @@ export default defineConfig({
   ignoreDeadLinks: true,
 
   lastUpdated: true,
+
+  markdown: {
+    config: (md) => {
+      const defaultRender =
+        md.renderer.rules.heading_close ||
+        function (tokens, idx, options, env, self) {
+          return self.renderToken(tokens, idx, options)
+        }
+
+      md.renderer.rules.heading_close = (tokens, idx, options, env, self) => {
+        const result = defaultRender(tokens, idx, options, env, self)
+        if (tokens[idx].tag === 'h1') {
+          return result + '\n<ArticleMeta />\n'
+        }
+        return result
+      }
+    },
+  },
 
   locales: {
     root: {
@@ -66,7 +84,7 @@ export default defineConfig({
       'link',
       {
         rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap',
+        href: 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap',
       },
     ],
   ],
