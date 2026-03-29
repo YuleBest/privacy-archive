@@ -1,0 +1,30 @@
+{
+  "name": "privacy-archive",
+  "version": "1.0.0",
+  "description": "隐私政策档案馆",
+  "keywords": [],
+  "license": "MIT",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "preview": "vitepress preview",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "lint-type": "oxlint --type-aware",
+    "lint-type:fix": "oxlint --type-aware --fix"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "oxfmt": "^0.41.0",
+    "oxlint": "^1.56.0",
+    "oxlint-tsgolint": "^0.17.1",
+    "vitepress": "2.0.0-alpha.17"
+  },
+  "packageManager": "pnpm@10.32.0"
+}
