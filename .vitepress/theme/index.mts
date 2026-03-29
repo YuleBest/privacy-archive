@@ -10,7 +10,7 @@ export default {
   extends: DefaultTheme,
   Layout() {
     return h(DefaultTheme.Layout, null, {
-      'aside-top': () => h(ArticleMeta)
+      'aside-top': () => h(ArticleMeta),
     })
   },
   enhanceApp({ app }) {
