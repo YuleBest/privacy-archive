@@ -1,5 +1,84 @@
-.vp-doc h2 {
-  border-top: none;
-  padding-top: 0;
-  margin-top: 2rem;
+:root {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Fix for dark mode font appearance */
+.dark {
+  color-scheme: dark;
+}
+
+.dark body {
+  /* Subtle increase in text weight for better readability in dark mode */
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Improve monospaced font rendering in diff viewer and code blocks */
+.vp-doc code, 
+.vp-doc pre,
+.diff-viewer {
+  font-family: var(--vp-font-family-mono);
+  font-variant-ligatures: contextual;
+  /* Slightly more weight for Google Sans Code in dark mode can help */
+}
+
+.dark .vp-doc code,
+.dark .diff-viewer {
+  font-weight: 450; /* Adjust for better visibility against dark bg */
+}
+
+/* Diff2Html Specific Dark Mode Adjustments */
+.dark .d2h-file-header {
+  background-color: var(--vp-c-bg-alt);
+  border-bottom: 1px solid var(--vp-c-divider);
+}
+
+.dark .d2h-file-name {
+  color: var(--vp-c-text-1);
+}
+
+.dark .d2h-diff-table {
+  background-color: var(--vp-c-bg);
+}
+
+.dark .d2h-code-line-ctn {
+  color: var(--vp-c-text-1);
+}
+
+.dark .d2h-code-line-prefix {
+  color: var(--vp-c-text-2);
+}
+
+.dark .d2h-info {
+  background-color: rgba(0, 100, 255, 0.1);
+  color: var(--vp-c-text-3);
+  border-color: var(--vp-c-divider);
+}
+
+.dark .d2h-ins {
+  background-color: rgba(63, 185, 80, 0.2);
+}
+
+.dark .d2h-del {
+  background-color: rgba(248, 81, 73, 0.2);
+}
+
+/* Ensure line numbers/prefixes don't get lost in dark mode */
+.dark .d2h-code-linenumber {
+  background-color: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-3);
+  border-right: 1px solid var(--vp-c-divider);
+}
+
+.dark .d2h-code-side-linenumber {
+  background-color: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-3);
+  border-right: 1px solid var(--vp-c-divider);
+}
+
+/* Selection color for dark mode */
+.dark ::selection {
+  background-color: var(--vp-c-brand-1);
+  color: white;
 }

@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { zhConfig } from './locales/zh-CN.mjs'
+import { getSidebar } from './configs/sidebar.mjs'
 
 export default defineConfig({
   ...zhConfig,
@@ -22,7 +23,51 @@ export default defineConfig({
       },
     },
 
-    nav: [{ text: '首页', link: '/' }],
+    sidebar: {
+      '/zh-CN/': [
+        { text: '开始', link: '/start' },
+        ...getSidebar('zh-CN')
+      ],
+      '/zh-HK/': [
+        { text: '開始', link: '/start' },
+        ...getSidebar('zh-HK')
+      ],
+      '/zh-TW/': [
+        { text: '開始', link: '/start' },
+        ...getSidebar('zh-TW')
+      ],
+      '/en-US/': [
+        { text: 'Start', link: '/start' },
+        ...getSidebar('en-US')
+      ],
+      '/': [
+        {
+          text: '开始',
+          link: '/start',
+        },
+        {
+          text: '简体中文',
+          link: '/zh-CN/',
+        },
+        {
+          text: '繁體中文（香港）',
+          link: '/zh-HK/',
+        },
+        {
+          text: '繁體中文（臺灣）',
+          link: '/zh-TW/',
+        },
+        {
+          text: 'English',
+          link: '/en-US/',
+        },
+      ],
+    },
+
+    nav: [
+      { text: '首页', link: '/' },
+      { text: '版本对比', link: '/diff' }
+    ],
 
     socialLinks: [{ icon: 'github', link: 'https://github.com/YuleBest/privacy-archive' }],
   },

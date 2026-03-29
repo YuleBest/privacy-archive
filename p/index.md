@@ -12,3 +12,5 @@ hero:
       text: 贡献条目
       link: ./contribute
 ---
+
+<Catalog :level="1"/>

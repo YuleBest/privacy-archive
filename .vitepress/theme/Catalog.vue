@@ -5,7 +5,7 @@ import { computed } from 'vue'
 const props = defineProps({
   level: {
     type: Number,
-    default: 1,
+    default: 4,
   },
   base: {
     type: String,
@@ -37,13 +37,14 @@ const catalogTree = computed(() => {
 
   const allPages = Object.entries(modules).map(([path, mod]: [string, any]) => {
     let vitePressPath = path.replace('../../p/', '')
+    const fm = mod.frontmatter || mod.__pageData?.frontmatter || {}
     return {
       path: vitePressPath,
       title:
-        mod.frontmatter?.title ||
+        fm.title ||
         mod.__pageData?.title ||
         vitePressPath.split('/').pop()?.replace('.md', ''),
-      frontmatter: mod.frontmatter,
+      frontmatter: fm,
       dir: vitePressPath.substring(0, vitePressPath.lastIndexOf('/') + 1),
     }
   })
@@ -54,8 +55,15 @@ const catalogTree = computed(() => {
     const files = allPages
       .filter((f) => f.dir === dir && !f.path.endsWith('index.md'))
       .sort((a, b) => {
-        if (a.frontmatter?.date && b.frontmatter?.date) {
-          return new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
+        const vA = a.frontmatter?.version
+        const vB = b.frontmatter?.version
+        if (vA && vB) {
+          const dA = new Date(vA).getTime()
+          const dB = new Date(vB).getTime()
+          if (!isNaN(dA) && !isNaN(dB)) {
+            return dB - dA
+          }
+          return String(vB).localeCompare(String(vA))
         }
         return a.title.localeCompare(b.title)
       })
@@ -94,6 +102,15 @@ const catalogTree = computed(() => {
   return buildSubTree(currentDir, 1)
 })
 
+const formatDate = (val: any) => {
+  if (!val) return ''
+  const date = new Date(val)
+  if (!isNaN(date.getTime())) {
+    return date.toISOString().split('T')[0]
+  }
+  return val.toString()
+}
+
 const resolveLink = (path: string) => {
   return withBase('/' + path.replace('.md', ''))
 }
@@ -124,8 +141,8 @@ const resolveLink = (path: string) => {
               </svg>
               <span class="catalog-title">{{ item.title }}</span>
             </div>
-            <span v-if="item.frontmatter?.date" class="catalog-date">{{
-              item.frontmatter.date
+            <span v-if="item.frontmatter?.version" class="catalog-date">{{
+              formatDate(item.frontmatter.version)
             }}</span>
           </a>
         </div>
@@ -195,6 +212,7 @@ const resolveLink = (path: string) => {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
   padding: 0.6rem 0.8rem;
   text-decoration: none !important;
   color: var(--vp-c-text-1) !important;
@@ -204,25 +222,34 @@ const resolveLink = (path: string) => {
   display: flex;
   align-items: center;
   gap: 0.6rem;
+  flex: 1;
+  min-width: 0;
 }
 
 .octicon {
   opacity: 0.6;
   color: var(--vp-c-text-2);
+  flex-shrink: 0;
 }
 
 .octicon-dir {
   color: var(--vp-c-brand-1);
+  flex-shrink: 0;
 }
 
 .catalog-title {
   font-weight: 500;
   font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .catalog-date {
   font-size: 0.8rem;
   color: var(--vp-c-text-2);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .catalog-subdir {
@@ -238,7 +265,6 @@ const resolveLink = (path: string) => {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--vp-c-text-2);
-  text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 

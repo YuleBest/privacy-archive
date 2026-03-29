@@ -1,0 +1,60 @@
+{
+    "weixin_1": {
+        "zh-CN": {
+            "path": "/微信/腾讯微信软件许可及服务协议",
+            "versions": [
+                "2026-03-30"
+            ]
+        },
+        "zh-TW": {
+            "path": "/微信/騰訊微信軟體許可及服務協議",
+            "versions": [
+                "2026-03-30"
+            ]
+        },
+        "zh-HK": {
+            "path": "/微信/騰訊微信軟件許可及服務協議",
+            "versions": [
+                "2026-03-30"
+            ]
+        },
+        "en-US": {
+            "path": "/Weixin/Agreement-on-Software-License-and-Service-of-Tencent-Weixin",
+            "versions": [
+                "2026-03-30"
+            ]
+        }
+    },
+    "weixin_2": {
+        "zh-CN": {
+            "path": "/微信/微信隐私保护指引",
+            "versions": [
+                "2025-05-09",
+                "2023-11-10",
+                "2022-06-27",
+                "2022-04-28",
+                "2022-04-13",
+                "2022-01-12",
+                "2021-10-29"
+            ]
+        },
+        "zh-TW": {
+            "path": "/微信/微信隱私權保護指引",
+            "versions": [
+                "2025-05-09"
+            ]
+        },
+        "zh-HK": {
+            "path": "/微信/微信隱私權保護指引",
+            "versions": [
+                "2025-05-09"
+            ]
+        },
+        "en-US": {
+            "path": "/Weixin/Weixin-Privacy-Policy",
+            "versions": [
+                "2025-05-09"
+            ]
+        }
+    }
+}
